@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'; // Importa React y los hooks aquí
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from './components/NavigationBar'; // A
-import './App.css';
+import Home from './pages/Home'; // Asegúrate de que la ruta sea correcta
 
 function App() {
   const [mensaje, setMensaje] = useState('');  // Usamos el hook useState
@@ -17,6 +18,8 @@ function App() {
   return (
     <div className="min-vh-100 bg-light">
       <NavigationBar />
+      <Home />
+
     </div>
   );
 }
