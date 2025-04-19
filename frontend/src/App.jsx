@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="min-vh-100 bg-light">
-      <NavigationBar />
+      <NavigationBar children={mensaje}/>
     </div>
   );
 }
