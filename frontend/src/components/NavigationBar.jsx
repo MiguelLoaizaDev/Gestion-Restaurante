@@ -25,25 +25,25 @@ function NavigationBar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link d-flex align-items-center" href="#productos">
+                            <a className="nav-link d-flex align-items-center" href="/EnterProduct">
                                 <FaUtensils className="me-2" />
                                 Ingresar Productos
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link d-flex align-items-center" href="#ingredientes">
+                            <a className="nav-link d-flex align-items-center" href="/EnterIngredient">
                                 <FaBoxOpen className="me-2" />
                                 Ingresar Ingredientes
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link d-flex align-items-center" href="#inventario">
+                            <a className="nav-link d-flex align-items-center" href="/ViewInventory">
                                 <FaClipboardList className="me-2" />
                                 Ver Inventario
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link d-flex align-items-center" href="#reportes">
+                            <a className="nav-link d-flex align-items-center" href="/Reports">
                                 <FaChartBar className="me-2" />
                                 Reportes
                             </a>
