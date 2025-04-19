@@ -12,6 +12,7 @@
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 70px;
   }
   
   .navbar {
