@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="min-vh-100 bg-light">
-      <NavigationBar />
+      <NavigationBar children={mensaje}/>
       <Router>
         <div className="mt-5">
           <Routes>
