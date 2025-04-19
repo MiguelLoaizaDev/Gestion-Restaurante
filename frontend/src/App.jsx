@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'; // Importa React y los hooks aquí
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationBar from './components/NavigationBar'; // A
-import Home from './pages/Home'; // Asegúrate de que la ruta sea correcta
+import './styles/variables.css';
+import './App.css';
+import NavigationBar from './components/NavigationBar';
+import Home from './pages/Home';
+import ShowInventory from './pages/ShowInventory';
+import EnterProducts from './pages/EnterProducts';
+import EnterIngredients from './pages/EnterIngredients';
+import Reports from './pages/Reports';
 
 function App() {
-  const [mensaje, setMensaje] = useState('');  // Usamos el hook useState
+  const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
     // Hacemos la solicitud a la API
@@ -18,8 +24,17 @@ function App() {
   return (
     <div className="min-vh-100 bg-light">
       <NavigationBar />
-      <Home />
-
+      <Router>
+        <div className="mt-5">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/ViewInventory" element={<ShowInventory />} />
+            <Route path="/EnterProduct" element={<EnterProducts />} />
+            <Route path="/EnterIngredient" element={<EnterIngredients />} />
+            <Route path="/Reports" element={<Reports />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }

@@ -1,0 +1,66 @@
+:root {
+    --color-primary: #4a90e2;      /* Azul suave */
+    --color-secondary: #7b8a9a;    /* Gris azulado */
+    --color-background: #f4f6f8;   /* Gris claro */
+    --color-text: #2c3e50;         /* Gris oscuro */
+    --color-success: #2ecc71;      /* Verde esmeralda */
+    --color-warning: #f39c12;      /* Amarillo cálido */
+    --color-error: #e74c3c;        /* Rojo vibrante */
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .navbar {
+    background-color: var(--color-primary);
+  }
+  
+  .navbar.navbar-expand-lg {
+    background-color: var(--color-primary) !important;
+  }
+  
+  .navbar .nav-link {
+    color: white !important;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar .nav-link:hover {
+    color: var(--color-warning) !important;
+  }
+  
+  .nav-link:hover {
+    color: var(--color-secondary);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+  
+  .nav-tabs .nav-link {
+    color: var(--color-primary);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-tabs .nav-link:hover {
+    color: white;
+    background-color: var(--color-primary);
+  }
+  
+  .nav-tabs .nav-link.active {
+    color: white;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
