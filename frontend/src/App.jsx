@@ -12,7 +12,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setMensaje(data.mensaje))  // Actualizamos el estado con el mensaje
       .catch((err) => console.error('Error al conectar con el backend:', err));
-  }, []);  // Solo se ejecuta una vez cuando el componente se monta
+  }, []);  // Gay
 
   return (
     <div className="min-vh-100 bg-light">
