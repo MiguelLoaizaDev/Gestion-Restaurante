@@ -4,7 +4,7 @@ const Reporte = () => {
   const [reportesP, setReportesP] = useState([]);
   const [reportesI, setReportesI] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/showReporte")
+    fetch("http://localhost:5000/api/inventario/reporte")
       .then((res) => res.json())
       .then((data) => {
         console.log("Reportes: ", data.data);

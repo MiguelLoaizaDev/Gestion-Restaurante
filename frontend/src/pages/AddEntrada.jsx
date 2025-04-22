@@ -7,7 +7,7 @@ const AddEntrada = () => {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/showProducto")
+    fetch("http://localhost:5000/api/productos/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Producos recibidos, renderizando...");
@@ -18,7 +18,7 @@ const AddEntrada = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/addEntradaP", {
+    fetch("http://localhost:5000/api/productos/entrada", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ producto, cantidad }),

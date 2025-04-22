@@ -7,7 +7,7 @@ const AddEntradaI = () => {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/showIngrediente")
+    fetch("http://localhost:5000/api/ingredientes/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Ingredientes recibidos, renderizando...");
@@ -18,7 +18,7 @@ const AddEntradaI = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/addEntradaI", {
+    fetch("http://localhost:5000/api/ingredientes/entrada", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ingrediente, cantidad }),
@@ -34,7 +34,7 @@ const AddEntradaI = () => {
   return (
     <div>
       <h2>Agregar una entrada</h2>
-      <form action="/addEntradaP" method="post" onSubmit={handleSubmit}>
+      <form  method="post" onSubmit={handleSubmit}>
         <select name="ingrediente" value={ingrediente} onChange={(e) => setIngrediente(e.target.value)}>
           <option value="">Selecciona una opcion</option>
           {ingredientes.map((ingredient) => (

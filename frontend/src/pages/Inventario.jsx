@@ -4,7 +4,7 @@ const Inventario = () => {
   const [inventarioP, setInventarioP] = useState([]);
   const [inventarioI, setInventarioI] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/showInventario")
+    fetch("http://localhost:5000/api/inventario/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Inventario: ", data.dataP,data.dataI);

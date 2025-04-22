@@ -7,7 +7,7 @@ const Ingredientes = () => {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/showIngrediente")
+    fetch("http://localhost:5000/api/ingredientes/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Producos recibidos, renderizando...");
@@ -20,7 +20,7 @@ const Ingredientes = () => {
     e.preventDefault();
     console.log("producto enviado");
 
-    fetch("http://localhost:5000/api/addIngrediente", {
+    fetch("http://localhost:5000/api/ingredientes/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ingrediente, unidad }),
@@ -33,7 +33,7 @@ const Ingredientes = () => {
         setUnidad("");
         setMsg(data.msg);
 
-        return fetch("http://localhost:5000/api/showIngrediente");
+        return fetch("http://localhost:5000/api/ingredientes/");
       })
       .then((res)=>res.json())
       .then((data)=>{
@@ -45,7 +45,7 @@ const Ingredientes = () => {
 
   return (
     <div>
-      <form action="/api/addProductos" method="post" onSubmit={handleSubmit}>
+      <form method="post" onSubmit={handleSubmit}>
         <input
           type="text"
           name="producto"

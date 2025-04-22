@@ -7,7 +7,7 @@ const Productos = () => {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/showProducto")
+    fetch("http://localhost:5000/api/productos/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Producos recibidos, renderizando...");
@@ -20,7 +20,7 @@ const Productos = () => {
     e.preventDefault();
     console.log("producto enviado");
 
-    fetch("http://localhost:5000/api/addProducto", {
+    fetch("http://localhost:5000/api/productos/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ producto, unidad }),
@@ -33,7 +33,7 @@ const Productos = () => {
         setUnidad("");
         setMsg(data.msg);
 
-        return fetch("http://localhost:5000/api/showProducto");
+        return fetch("http://localhost:5000/api/productos/");
       })
       .then((res)=>res.json())
       .then((data)=>{
