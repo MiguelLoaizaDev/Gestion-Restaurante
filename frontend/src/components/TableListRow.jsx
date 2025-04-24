@@ -25,8 +25,8 @@ function TableListRow({ table, setSelectedTable, setShowModal }) {
               : "Reservada"}
           </span>
         </td>
-        <td>{table.customerName || "-"}</td>
-        <td>{table.timeOccupied || "-"}</td>
+        <td>{table.customer_name || "-"}</td>
+        <td>{table.time_occupied || "-"}</td>
         <td>
           <button
             className="btn btn-outline-primary btn-sm"

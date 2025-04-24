@@ -8,6 +8,7 @@ import AddSalida  from "../pages/AddSalida"
 import AddEntradaI from "../pages/AddEntradaI"
 import AddSalidaI  from "../pages/AddSalidaI"
 import Reporte from "../pages/Reporte"
+import Pedidos from '../pages/Pedidos'
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Route path="/addEntradaI" element={<AddEntradaI />} />
       <Route path="/addSalidaI" element={<AddSalidaI />} />
       <Route path="/Reportes" element={<Reporte />} />
+      <Route path="/historialPedidos" element={<Pedidos />} />
     </Routes>
   );
 };

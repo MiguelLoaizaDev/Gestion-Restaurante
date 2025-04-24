@@ -3,22 +3,19 @@ import React, { useEffect, useState } from "react";
 const Productos = () => {
   const [producto, setProducto] = useState("");
   const [unidad, setUnidad] = useState("");
-  const [productos, setProductos] = useState([])
+  const [productos, setProductos] = useState([]);
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/api/productos/")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Producos recibidos, renderizando...");
-        console.log(data.data);
-        setProductos(data.data)        
+        setProductos(data.data);
       });
-  },[]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("producto enviado");
 
     fetch("http://localhost:5000/api/productos/", {
       method: "POST",
@@ -27,58 +24,87 @@ const Productos = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('renderizando...');
-        
         setProducto("");
         setUnidad("");
         setMsg(data.msg);
 
         return fetch("http://localhost:5000/api/productos/");
       })
-      .then((res)=>res.json())
-      .then((data)=>{
-        console.log('renderizando nuevamente...')
-        console.log(data.data);
-        setProductos(data.data)
-      })
+      .then((res) => res.json())
+      .then((data) => {
+        setProductos(data.data);
+      });
   };
 
   return (
-    <div>
-      <form action="/api/addProductos" method="post" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="producto"
-          value={producto}
-          required
-          onChange={(e) => setProducto(e.target.value)}
-        />
-        <select
-          name="unidad"
-          required
-          onChange={(e) => setUnidad(e.target.value)}
-        >
-          <option value="">Selecciona una opcion</option>
-          <option value="libras">Libras</option>
-          <option value="unidad">Unidad</option>
-          <option value="litro">Litro</option>
-          <option value="paquete">Paquete</option>
-        </select>
-        <button type="submit">Enviar</button>
+    <div className="container mt-4">
+      <h1 className="mb-4">Gestión de Productos</h1>
+
+      <form onSubmit={handleSubmit} className="mb-4">
+        <div className="mb-3">
+          <label htmlFor="producto" className="form-label">Nombre del producto</label>
+          <input
+            type="text"
+            className="form-control"
+            id="producto"
+            value={producto}
+            required
+            onChange={(e) => setProducto(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="unidad" className="form-label">Unidad</label>
+          <select
+            className="form-select"
+            id="unidad"
+            required
+            value={unidad}
+            onChange={(e) => setUnidad(e.target.value)}
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="libras">Libras</option>
+            <option value="unidad">Unidad</option>
+            <option value="litro">Litro</option>
+            <option value="paquete">Paquete</option>
+          </select>
+        </div>
+
+        <button type="submit" className="btn btn-primary">Enviar</button>
       </form>
-      <p>{msg}</p>
-      <a href="/addEntrada">Agregar una entrada</a>
-      <br />
-      <a href="/addSalida">Agregar una salida</a>
-      <h2>Productos</h2>
-      {productos.length>0?<ul>
-        {productos.map((product)=>(
-          <li key={product.id}>
-            {product.nombre}  - {product.unidad}
-          </li>
-        ))}
-      </ul>:<p>No hay productos...</p>}
-      <a href="/">Volver</a>
+
+      {msg && <div className="alert alert-success">{msg}</div>}
+
+      <div className="mb-4">
+        <a href="/addEntrada" className="btn btn-outline-secondary me-2">Agregar una entrada</a>
+        <a href="/addSalida" className="btn btn-outline-secondary">Agregar una salida</a>
+      </div>
+
+      <h2 className="mb-3">Lista de Productos</h2>
+      <table className="table table-bordered table-striped">
+        <thead className="table-light">
+          <tr>
+            <th>Nombre</th>
+            <th>Unidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          {productos.length > 0 ? (
+            productos.map((product) => (
+              <tr key={product.id}>
+                <td>{product.nombre}</td>
+                <td>{product.unidad}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center text-muted">No hay productos para mostrar...</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <a href="/" className="btn btn-link mt-3">Volver al inicio</a>
     </div>
   );
 };

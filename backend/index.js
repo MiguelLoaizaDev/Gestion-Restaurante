@@ -6,6 +6,8 @@ import cors from "cors";
 import productoRoutes from './routes/producto.routes.js'
 import inventarioRoutes from './routes/inventario.routes.js'
 import ingredientesRoutes from './routes/ingredientes.routes.js'
+import mesasRoutes from './routes/mesas.routes.js'
+import pedidosRoutes from './routes/pedidos.routes.js'
 
 //USOS Y CONSTANTES
 const app = express();
@@ -26,6 +28,9 @@ app.get("/",(req,res)=>{
 app.use('/api/productos',productoRoutes)
 app.use('/api/inventario',inventarioRoutes)
 app.use('/api/ingredientes',ingredientesRoutes)
+app.use('/api/mesas',mesasRoutes)
+app.use('/api/pedidos',pedidosRoutes)
+
 
 
 

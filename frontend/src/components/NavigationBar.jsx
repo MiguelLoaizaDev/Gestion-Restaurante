@@ -48,6 +48,12 @@ function NavigationBar({children}) {
                                 Reportes
                             </a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link d-flex align-items-center" href="/historialPedidos">
+                                <FaChartBar className="me-2" />
+                                Historial de pedidos
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

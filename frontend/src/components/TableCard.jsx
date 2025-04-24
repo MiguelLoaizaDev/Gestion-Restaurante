@@ -29,10 +29,11 @@ function TableCard({ table, setSelectedTable, setShowModal }) {
                     <FaUsers size={16} />
                     <span>{table.capacity}</span>
                 </div>
+                {console.log("Estado de tabla",table)}
                 {table.status === "occupied" && (
                     <div className="d-flex align-items-center gap-2 mt-2">
                         <FaClock size={16} />
-                        <span>{table.timeOccupied}</span>
+                        <span>{table.time_occupied}</span>
                     </div>
                 )}
             </div>
