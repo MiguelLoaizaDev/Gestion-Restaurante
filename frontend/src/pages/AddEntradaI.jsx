@@ -11,7 +11,6 @@ const AddEntradaI = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Ingredientes recibidos, renderizando...");
-        console.log(data.data);
         setIngredientes(data.data);
       });
   }, []);
@@ -32,27 +31,52 @@ const AddEntradaI = () => {
   };
 
   return (
-    <div>
-      <h2>Agregar una entrada</h2>
-      <form  method="post" onSubmit={handleSubmit}>
-        <select name="ingrediente" value={ingrediente} onChange={(e) => setIngrediente(e.target.value)}>
-          <option value="">Selecciona una opcion</option>
-          {ingredientes.map((ingredient) => (
-            <option key={ingredient.id} value={ingredient.nombre}>
-              {ingredient.nombre}
-            </option>
-          ))}
-        </select>
-        <input
-          type="number"
-          name="cantidad"
-          value={cantidad}
-          onChange={(e) => setCantidad(e.target.value)}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-      <p>{msg}</p>
-      <a href="/">Volver</a>
+    <div className="container mt-5">
+      <div className="card shadow p-4">
+        <h2 className="mb-4">Agregar Entrada de Ingrediente</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Ingrediente</label>
+            <select
+              className="form-select"
+              name="ingrediente"
+              value={ingrediente}
+              required
+              onChange={(e) => setIngrediente(e.target.value)}
+            >
+              <option value="">Selecciona una opción</option>
+              {ingredientes.map((ingredient) => (
+                <option key={ingredient.id} value={ingredient.nombre}>
+                  {ingredient.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Cantidad</label>
+            <input
+              type="number"
+              className="form-control"
+              name="cantidad"
+              value={cantidad}
+              required
+              min="0"
+              step="any"
+              onChange={(e) => setCantidad(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Enviar
+          </button>
+        </form>
+
+        {msg && <div className="alert alert-info mt-3">{msg}</div>}
+
+        <a href="/" className="mt-3">Volver</a>
+      </div>
     </div>
   );
 };

@@ -11,17 +11,21 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const producto = req.body.producto;
   const unidad = req.body.unidad;
-  const result = await db.query("SELECT * FROM productos WHERE nombre=$1", [
-    producto,
-  ]);
-  if (result.rows.length === 0) {
-    await db.query("INSERT INTO productos (nombre,unidad) VALUES ($1,$2)", [
-      producto,
-      unidad,
-    ]);
-    res.json({ msg: "Producto añadido correctamente" });
+  if (producto === "" || unidad === "") {
+    res.json({ msgErr: "Especifique ambos campos porfavor!" });
   } else {
-    res.json({ msg: "Producto existente" });
+    const result = await db.query("SELECT * FROM productos WHERE nombre=$1", [
+      producto,
+    ]);
+    if (result.rows.length === 0) {
+      await db.query("INSERT INTO productos (nombre,unidad) VALUES ($1,$2)", [
+        producto,
+        unidad,
+      ]);
+      res.json({ msg: "Producto añadido correctamente" });
+    } else {
+      res.json({ msg: "Producto existente" });
+    }
   }
 });
 

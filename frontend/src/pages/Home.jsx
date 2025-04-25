@@ -40,7 +40,6 @@ function Home() {
     fetchPedidos();
   }, []);
 
-
   const [selectedTable, setSelectedTable] = useState(null);
   const [activeTab, setActiveTab] = useState("floor");
   const [showModal, setShowModal] = useState(false);
@@ -50,11 +49,11 @@ function Home() {
     setSelectedTable(null);
   };
 
-  const updatePedidos=async()=>{
-    const response=await fetch('api/pedidos/')
-    const pedidosActualizados=response.json()
-    setPedidos(pedidosActualizados)
-  }
+  const updatePedidos = async () => {
+    const response = await fetch("api/pedidos/");
+    const pedidosActualizados = response.json();
+    return setPedidos(pedidosActualizados);
+  };
 
   const updateTableStatus = async (id, status, customerName, notas = {}) => {
     try {
@@ -76,8 +75,9 @@ function Home() {
       const response = await fetch("/api/mesas");
       const mesasActualizadas = await response.json();
       setTables(mesasActualizadas.data);
-      const response1 = await fetch("/api/pedidos");
+      const response1 = await fetch("api/pedidos/");
       const pedidosActualizados = await response1.json();
+      console.log("Lista de pedidos actualizados:", pedidosActualizados);
       setPedidos(pedidosActualizados.data);
     } catch (error) {
       console.error("Error actualizando mesa", error);
@@ -152,15 +152,20 @@ function Home() {
         )}
       </div>
 
-      <Summary tables={tables} pedidos={pedidos} updatePedidos={updatePedidos} updateTableStatus={updateTableStatus}/>
+      <Summary
+        tables={tables}
+        pedidos={pedidos}
+        updatePedidos={updatePedidos}
+        updateTableStatus={updateTableStatus}
+      />
 
       {selectedTable && (
         <TableModal
           table={selectedTable}
           showModal={showModal}
           handleCloseModal={handleCloseModal}
-          updateTableStatus={updateTableStatus}
           updatePedidos={updatePedidos}
+          updateTableStatus={updateTableStatus}
         />
       )}
     </div>

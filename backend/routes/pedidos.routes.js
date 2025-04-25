@@ -38,10 +38,6 @@ router.post("/", async (req, res) => {
   const pedidos = req.body.pedidos;
   const customerName = req.body.customerName;
   const notes = req.body.notes;
-  console.log(`mesa ID: ${mesaId}`);
-
-  console.log(`customerName: ${customerName}`);
-  console.log(`Notes: ${notes}`);
 
   if (pedidos.length > 0) {
     const result = await db.query(
@@ -49,7 +45,6 @@ router.post("/", async (req, res) => {
       [mesaId, customerName, notes]
     );
     const pedidoId = result.rows[0].id;
-    console.log(pedidoId);
     for (const pedido of pedidos) {
       await db.query(
         "INSERT INTO pedido_detalle (pedido_id, plato_id, cantidad) VALUES ($1,$2,$3)",

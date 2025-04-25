@@ -10,8 +10,7 @@ const AddSalida = () => {
     fetch("http://localhost:5000/api/productos/")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Producos recibidos, renderizando...");
-        console.log(data.data);
+        console.log("Productos recibidos, renderizando...");
         setProductos(data.data);
       });
   }, []);
@@ -32,27 +31,52 @@ const AddSalida = () => {
   };
 
   return (
-    <div>
-      <h2>Agregar una salida</h2>
-      <form action="/addSalidaP" method="post" onSubmit={handleSubmit}>
-        <select name="producto" value={producto} onChange={(e) => setProducto(e.target.value)}>
-          <option value="">Selecciona una opcion</option>
-          {productos.map((product) => (
-            <option key={product.id} value={product.nombre}>
-              {product.nombre}
-            </option>
-          ))}
-        </select>
-        <input
-          type="number"
-          name="cantidad"
-          value={cantidad}
-          onChange={(e) => setCantidad(e.target.value)}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-      <a href="/">Volver</a>
-      <p>{msg}</p>
+    <div className="container mt-5">
+      <div className="card shadow p-4">
+        <h2 className="mb-4">Registrar Salida de Producto</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Producto</label>
+            <select
+              className="form-select"
+              name="producto"
+              value={producto}
+              required
+              onChange={(e) => setProducto(e.target.value)}
+            >
+              <option value="">Selecciona una opción</option>
+              {productos.map((product) => (
+                <option key={product.id} value={product.nombre}>
+                  {product.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Cantidad</label>
+            <input
+              type="number"
+              className="form-control"
+              name="cantidad"
+              value={cantidad}
+              required
+              min="0"
+              step="any"
+              onChange={(e) => setCantidad(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Registrar Salida
+          </button>
+        </form>
+
+        {msg && <div className="alert alert-info mt-3">{msg}</div>}
+
+        <a href="/" className="btn btn-secondary mt-3">Volver</a>
+      </div>
     </div>
   );
 };

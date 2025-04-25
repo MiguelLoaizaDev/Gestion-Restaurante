@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function TableModal({ table, showModal, handleCloseModal, updateTableStatus, updatePedidos }) {
+function TableModal({
+  table,
+  showModal,
+  handleCloseModal,
+  updateTableStatus,
+  updatePedidos,
+}) {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("entrada");
   const [platos, setPlatos] = useState([]);
   const [pedidos, setPedidos] = useState([]);
@@ -17,17 +23,19 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus, upd
         },
         body: JSON.stringify({
           mesaId: table.id,
-          customerName:customerName,
+          customerName: customerName,
           notes: notas,
           pedidos: pedidos.map((p) => ({
             platoId: p.plato_id,
             cantidad: p.cantidad,
+            
           })),
         }),
       });
     } catch (error) {
       console.log(error);
     }
+    updatePedidos();
   };
 
   // Obtener productos desde la API
@@ -66,10 +74,6 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus, upd
     setPedidos((prevPedido) => prevPedido.filter((_, i) => i !== index));
   };
 
-  const pedidosFiltrados = pedidos.filter(
-    (producto) => producto.categoria === categoriaSeleccionada
-  );
-
   if (!showModal) return null;
 
   return (
@@ -79,9 +83,8 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus, upd
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              updateTableStatus(table.id, status, customerName, notas);
-              updatePedidos();
               handleSubmit();
+              updateTableStatus(table.id, status, customerName, notas);
               handleCloseModal();
               console.log("Form enviado correctamente");
             }}
@@ -154,28 +157,11 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus, upd
                     <button
                       type="button"
                       onClick={() => agregarPedido(categoriaSeleccionada)}
+                      className="btn btn-success mt-2"
                     >
                       añadir
                     </button>
                   </div>
-
-                  <ul className="list-group mb-3">
-                    {pedidosFiltrados.map((pedido, index) => (
-                      <li
-                        key={index}
-                        className="list-group-item d-flex justify-content-between align-items-center"
-                      >
-                        {pedido.nombre} - ${pedido.precio}
-                        <button
-                        // className="btn btn-sm btn-primary"
-                        // onClick={() => agregarProducto(producto)}
-                        // disabled={producto.stock === 0}
-                        >
-                          Agregar
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
 
                   <h6>Pedido Actual:</h6>
                   <ul className="list-group">

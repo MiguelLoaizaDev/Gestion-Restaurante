@@ -5,6 +5,7 @@ const Productos = () => {
   const [unidad, setUnidad] = useState("");
   const [productos, setProductos] = useState([]);
   const [msg, setMsg] = useState("");
+  const [msgErr, setMsgErr] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/api/productos/")
@@ -27,6 +28,7 @@ const Productos = () => {
         setProducto("");
         setUnidad("");
         setMsg(data.msg);
+        setMsgErr(data.msgErr);
 
         return fetch("http://localhost:5000/api/productos/");
       })
@@ -42,7 +44,9 @@ const Productos = () => {
 
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="mb-3">
-          <label htmlFor="producto" className="form-label">Nombre del producto</label>
+          <label htmlFor="producto" className="form-label">
+            Nombre del producto
+          </label>
           <input
             type="text"
             className="form-control"
@@ -54,7 +58,9 @@ const Productos = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="unidad" className="form-label">Unidad</label>
+          <label htmlFor="unidad" className="form-label">
+            Unidad
+          </label>
           <select
             className="form-select"
             id="unidad"
@@ -70,14 +76,21 @@ const Productos = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary">Enviar</button>
+        <button type="submit" className="btn btn-primary">
+          Enviar
+        </button>
       </form>
 
       {msg && <div className="alert alert-success">{msg}</div>}
+      {msgErr && <div className="alert alert-danger">{msgErr}</div>}
 
       <div className="mb-4">
-        <a href="/addEntrada" className="btn btn-outline-secondary me-2">Agregar una entrada</a>
-        <a href="/addSalida" className="btn btn-outline-secondary">Agregar una salida</a>
+        <a href="/addEntrada" className="btn btn-outline-secondary me-2">
+          Agregar una entrada
+        </a>
+        <a href="/addSalida" className="btn btn-outline-secondary">
+          Agregar una salida
+        </a>
       </div>
 
       <h2 className="mb-3">Lista de Productos</h2>
@@ -98,13 +111,17 @@ const Productos = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="2" className="text-center text-muted">No hay productos para mostrar...</td>
+              <td colSpan="2" className="text-center text-muted">
+                No hay productos para mostrar...
+              </td>
             </tr>
           )}
         </tbody>
       </table>
 
-      <a href="/" className="btn btn-link mt-3">Volver al inicio</a>
+      <a href="/" className="btn btn-link mt-3">
+        Volver al inicio
+      </a>
     </div>
   );
 };

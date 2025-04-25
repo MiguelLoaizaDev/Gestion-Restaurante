@@ -5,6 +5,7 @@ const Ingredientes = () => {
   const [unidad, setUnidad] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [msg, setMsg] = useState("");
+  const [msgErr, setMsgErr] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:5000/api/ingredientes/")
@@ -30,6 +31,7 @@ const Ingredientes = () => {
         setIngrediente("");
         setUnidad("");
         setMsg(data.msg);
+        setMsgErr(data.msgErr)
 
         return fetch("http://localhost:5000/api/ingredientes/");
       })
@@ -44,7 +46,6 @@ const Ingredientes = () => {
     <div className="container mt-5">
       <h1 className="mb-4">Agregar y Ver Ingredientes</h1>
 
-      {/* Formulario para agregar ingrediente */}
       <form className="mb-4" method="post" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="ingrediente" className="form-label">
@@ -69,6 +70,8 @@ const Ingredientes = () => {
             name="unidad"
             className="form-select"
             required
+            value={unidad}
+            defaultValue={""}
             onChange={(e) => setUnidad(e.target.value)}
           >
             <option value="">Selecciona una opción</option>
@@ -83,9 +86,9 @@ const Ingredientes = () => {
         </button>
       </form>
 
-      {msg && <p className="text-success">{msg}</p>}
+      {msg && <div className="alert alert-success">{msg}</div>}
+      {msgErr && <div className="alert alert-danger">{msgErr}</div>}
 
-      {/* Enlaces para agregar entradas o salidas */}
       <div className="mb-4">
         <a href="/addEntradaI" className="btn btn-link">
           Agregar una entrada
@@ -96,7 +99,6 @@ const Ingredientes = () => {
         </a>
       </div>
 
-      {/* Tabla de ingredientes */}
       <h2 className="mb-3">Ingredientes Disponibles</h2>
       <table className="table table-bordered table-striped">
         <thead className="table-light">
@@ -123,7 +125,6 @@ const Ingredientes = () => {
         </tbody>
       </table>
 
-      {/* Enlace para volver */}
       <a href="/" className="btn btn-link">
         Volver al inicio
       </a>
