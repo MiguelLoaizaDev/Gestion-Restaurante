@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Contenedor icopor",
+    "stock": 200,
+    "precio": "",
+    "categoria": ""
+  },
+  {
+    "nombre": "Bolsa plástica",
+    "stock": 200
+  },
+  {
+    "nombre": "Salsa BBQ",
+    "stock": 40
+  }
+]

@@ -1,0 +1,7 @@
+[
+  { "nombre": "Plato", "categoria": "plato", "stock": 30 },
+  { "nombre": "Vaso", "categoria": "vaso", "stock": 40 },
+  { "nombre": "Copa", "categoria": "copa", "stock": 20 },
+  { "nombre": "Cuchara", "categoria": "cuchara", "stock": 50 },
+  { "nombre": "Tenedor", "categoria": "tenedor", "stock": 50 }
+]

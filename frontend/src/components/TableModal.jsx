@@ -4,6 +4,10 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus }) {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("entrada");
   const [productos, setProductos] = useState([]);
   const [pedido, setPedido] = useState([]);
+  const [formData, setFormData] = useState({
+    customerName: table?.customerName || "",
+    status: table?.status || "available",
+  });
 
   // Obtener productos desde la API
   useEffect(() => {
@@ -32,6 +36,26 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus }) {
     (producto) => producto.categoria === categoriaSeleccionada
   );
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Actualizar estado de la mesa con todos los cambios
+    updateTableStatus(table.id, formData.status, {
+      customerName: formData.customerName,
+      pedido: pedido,
+    });
+
+    handleCloseModal();
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   if (!showModal) return null;
 
   return (
@@ -40,23 +64,26 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Mesa {table?.id}</h5>
-            <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={handleCloseModal}
+            ></button>
           </div>
-          <div className="modal-body">
-            <div className="row">
-              {/* Columna para detalles de la mesa */}
-              <div className="col-md-6">
-                <form>
+          <form onSubmit={handleSubmit}>
+            <div className="modal-body">
+              <div className="row">
+                {/* Columna para detalles de la mesa */}
+                <div className="col-md-6">
                   <div className="mb-3">
                     <label className="form-label">Cliente</label>
                     <input
                       type="text"
                       className="form-control"
+                      name="customerName"
                       placeholder="Nombre del cliente"
-                      defaultValue={table?.customerName || ""}
-                      onChange={(e) =>
-                        updateTableStatus(table.id, table.status, { customerName: e.target.value })
-                      }
+                      value={formData.customerName}
+                      onChange={handleInputChange}
                     />
                   </div>
 
@@ -64,90 +91,87 @@ function TableModal({ table, showModal, handleCloseModal, updateTableStatus }) {
                     <label className="form-label">Estado</label>
                     <select
                       className="form-select"
-                      value={table?.status}
-                      onChange={(e) => updateTableStatus(table.id, e.target.value)}
+                      name="status"
+                      value={formData.status}
+                      onChange={handleInputChange}
                     >
                       <option value="available">Disponible</option>
                       <option value="occupied">Ocupada</option>
                       <option value="reserved">Reservada</option>
                     </select>
                   </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Notas</label>
-                    <textarea
-                      className="form-control"
-                      rows={3}
-                      defaultValue={table?.notes || ""}
-                      onChange={(e) =>
-                        updateTableStatus(table.id, table.status, { notes: e.target.value })
-                      }
-                    ></textarea>
-                  </div>
-                </form>
-              </div>
-
-              {/* Columna para generar el pedido */}
-              <div className="col-md-6">
-                <h5>Generar Pedido</h5>
-                <div className="mb-3">
-                  <label className="form-label">Categoría</label>
-                  <select
-                    className="form-select"
-                    value={categoriaSeleccionada}
-                    onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-                  >
-                    <option value="entrada">Entradas</option>
-                    <option value="comida criolla">Comida Criolla</option>
-                    <option value="cortes de carne">Cortes de Carne</option>
-                    <option value="aves y pescados">Aves y Pescados</option>
-                    <option value="jugo">Jugos</option>
-                    <option value="jarra de jugo">Jarras de Jugos</option>
-                    <option value="cerveza">Cervezas</option>
-                    <option value="vino">Vinos</option>
-                  </select>
                 </div>
 
-                <ul className="list-group mb-3">
-                  {productosFiltrados.map((producto, index) => (
-                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                      {producto.nombre} - ${producto.precio}
-                      <button
-                        className="btn btn-sm btn-primary"
-                        onClick={() => agregarProducto(producto)}
-                        disabled={producto.stock === 0}
-                      >
-                        Agregar
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {/* Columna para generar el pedido */}
+                <div className="col-md-6">
+                  <h5>Generar Pedido</h5>
+                  <div className="mb-3">
+                    <label className="form-label">Categoría</label>
+                    <select
+                      className="form-select"
+                      value={categoriaSeleccionada}
+                      onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+                    >
+                      {[...new Set(productos.map(p => p.categoria))].map(cat => (
+                        <option key={cat} value={cat}>
+                          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <h6>Pedido Actual:</h6>
-                <ul className="list-group">
-                  {pedido.map((producto, index) => (
-                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                      {producto.nombre} - ${producto.precio}
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => eliminarProducto(index)}
+                  <ul className="list-group mb-3">
+                    {productosFiltrados.map((producto, index) => (
+                      <li
+                        key={index}
+                        className="list-group-item d-flex justify-content-between align-items-center"
                       >
-                        Eliminar
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                        {producto.nombre} - ${producto.precio}
+                        <button
+                          className="btn btn-sm btn-primary"
+                          onClick={() => agregarProducto(producto)}
+                          disabled={producto.stock === 0}
+                        >
+                          Agregar
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <h6>Pedido Actual:</h6>
+                  <ul className="list-group">
+                    {pedido.map((producto, index) => (
+                      <li
+                        key={index}
+                        className="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        {producto.nombre} - ${producto.precio}
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => eliminarProducto(index)}
+                        >
+                          Eliminar
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="modal-footer">
-            <button className="btn btn-secondary" onClick={handleCloseModal}>
-              Cerrar
-            </button>
-            <button className="btn btn-primary" onClick={handleCloseModal}>
-              Guardar cambios
-            </button>
-          </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={handleCloseModal}
+              >
+                Cerrar
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Guardar cambios
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

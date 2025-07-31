@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Sal",
+    "categoria": "especia",
+    "stock": 250,
+    "medida": "libra"
+  },
+  {
+    "nombre": "Tomate",
+    "categoria": "revuelto",
+    "stock": 130,
+    "medida": "unidad"
+  },
+  {
+    "nombre": "Pulpa de mango",
+    "categoria": "pulpa",
+    "stock": 20,
+    "medida": "unidad"
+  },
+  {
+    "nombre": "Panela",
+    "categoria": "endulzante",
+    "stock": 15,
+    "medida": "unidad"
+  },
+  {
+    "nombre": "Leche",
+    "categoria": "liquido",
+    "stock": 25,
+    "medida": "litro"
+  }
+]

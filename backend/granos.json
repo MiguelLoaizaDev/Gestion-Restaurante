@@ -1,0 +1,28 @@
+[
+  {
+    "nombre": "Frijol",
+    "stock": 200,
+    "medida": "libra",
+    "precio": ""
+  },
+  {
+    "nombre": "Arroz",
+    "stock": 160,
+    "medida": "libra"
+  },
+  {
+    "nombre": "Lenteja",
+    "stock": 35,
+    "medida": "kilo"
+  },
+  {
+    "nombre": "Avena",
+    "stock": 25,
+    "medida": "kilo"
+  },
+  {
+    "nombre": "Maíz",
+    "stock": 50,
+    "medida": "libra"
+  }
+]

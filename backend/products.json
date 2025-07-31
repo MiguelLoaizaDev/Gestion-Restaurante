@@ -1,0 +1,398 @@
+[
+  {
+    "nombre": "Ceviche de camarón",
+    "categoria": "entrada",
+    "precio": 22000,
+    "stock": 1010
+  },
+  {
+    "nombre": "Aborrajados",
+    "categoria": "entrada",
+    "precio": 16000,
+    "stock": 15
+  },
+  {
+    "nombre": "Bolas de queso",
+    "categoria": "entrada",
+    "precio": 15000,
+    "stock": 20
+  },
+  {
+    "nombre": "Patacones con salsa criolla",
+    "categoria": "entrada",
+    "precio": 12000,
+    "stock": 25
+  },
+  {
+    "nombre": "Mix de chorizos",
+    "categoria": "entrada",
+    "precio": 20000,
+    "stock": 10
+  },
+  {
+    "nombre": "Lengua a la criolla",
+    "categoria": "plato fuerte",
+    "precio": 35000,
+    "stock": 10
+  },
+  {
+    "nombre": "Sobrebarriga a la criolla",
+    "categoria": "plato fuerte",
+    "precio": 35000,
+    "stock": 10
+  },
+  {
+    "nombre": "Hígado encebollado",
+    "categoria": "plato fuerte",
+    "precio": 38000,
+    "stock": 10
+  },
+  {
+    "nombre": "Ubre a la criolla o asada",
+    "categoria": "plato fuerte",
+    "precio": 32000,
+    "stock": 10
+  },
+  {
+    "nombre": "Chuleta de cerdo",
+    "categoria": "plato fuerte",
+    "precio": 35000,
+    "stock": 10
+  },
+  {
+    "nombre": "Chuleta de pollo",
+    "categoria": "plato fuerte",
+    "precio": 35000,
+    "stock": 10
+  },
+  {
+    "nombre": "Filete de pollo o cerdo a la plancha",
+    "categoria": "plato fuerte",
+    "precio": 33000,
+    "stock": 10
+  },
+  {
+    "nombre": "Baby Beef",
+    "categoria": "plato fuerte",
+    "precio": 50000,
+    "stock": 10
+  },
+  {
+    "nombre": "Churrasco de res o cerdo",
+    "categoria": "plato fuerte",
+    "precio": 44000,
+    "stock": 10
+  },
+  {
+    "nombre": "Punta de anca de res o cerdo",
+    "categoria": "plato fuerte",
+    "precio": 47000,
+    "stock": 10
+  },
+  {
+    "nombre": "Costilla BBQ",
+    "categoria": "plato fuerte",
+    "precio": 50000,
+    "stock": 10
+  },
+  {
+    "nombre": "Tomahawk de res o cerdo",
+    "categoria": "plato fuerte",
+    "precio": 75000,
+    "stock": 10
+  },
+  {
+    "nombre": "Picada",
+    "categoria": "plato fuerte",
+    "precio": 60000,
+    "stock": 10
+  },
+  {
+    "nombre": "Fiambre",
+    "categoria": "plato fuerte",
+    "precio": 55000,
+    "stock": 10
+  },
+  {
+    "nombre": "Tamal valluno",
+    "categoria": "plato fuerte",
+    "precio": 22000,
+    "stock": 10
+  },
+  {
+    "nombre": "Plato montañero o bandeja paisa",
+    "categoria": "plato fuerte",
+    "precio": 40000,
+    "stock": 10
+  },
+  {
+    "nombre": "Frijolada",
+    "categoria": "plato fuerte",
+    "precio": 25000,
+    "stock": 10
+  },
+  {
+    "nombre": "Sancocho de gallina",
+    "categoria": "plato fuerte",
+    "precio": 30000,
+    "stock": 10
+  },
+  {
+    "nombre": "Nuggets de pollo + papa francesa",
+    "categoria": "infantil",
+    "precio": 20000,
+    "stock": 10
+  },
+  {
+    "nombre": "Chuleta de pollo + papa francesa",
+    "categoria": "infantil",
+    "precio": 22000,
+    "stock": 10
+  },
+  {
+    "nombre": "Pinchos de cerdo, res o pollo",
+    "categoria": "infantil",
+    "precio": 15000,
+    "stock": 10
+  },
+  {
+    "nombre": "Aguacate",
+    "categoria": "adicional",
+    "precio": 5000,
+    "stock": 0
+  },
+  {
+    "nombre": "Papa francesa",
+    "categoria": "adicional",
+    "precio": 6000,
+    "stock": 0
+  },
+  {
+    "nombre": "Ensalada",
+    "categoria": "adicional",
+    "precio": 5000,
+    "stock": 0
+  },
+  {
+    "nombre": "Criolla",
+    "categoria": "adicional",
+    "precio": 5000,
+    "stock": 0
+  },
+  {
+    "nombre": "Hogao",
+    "categoria": "adicional",
+    "precio": 5000,
+    "stock": 0
+  },
+  {
+    "nombre": "Frijol",
+    "categoria": "adicional",
+    "precio": 8000,
+    "stock": 0
+  },
+  {
+    "nombre": "Sancocho",
+    "categoria": "adicional",
+    "precio": 8000,
+    "stock": 0
+  },
+  {
+    "nombre": "Arroz",
+    "categoria": "adicional",
+    "precio": 2000,
+    "stock": 0
+  },
+  {
+    "nombre": "Browny + helado",
+    "categoria": "postre",
+    "precio": 15000,
+    "stock": 15
+  },
+  {
+    "nombre": "Desamargado",
+    "categoria": "postre",
+    "precio": 15000,
+    "stock": 15
+  },
+  {
+    "nombre": "Brevas con manjar blanco",
+    "categoria": "postre",
+    "precio": 12000,
+    "stock": 15
+  },
+  {
+    "nombre": "Torta negra envinada",
+    "categoria": "postre",
+    "precio": 12000,
+    "stock": 15
+  },
+  {
+    "nombre": "Lulada",
+    "categoria": "Limonada",
+    "precio": 12000,
+    "stock": 25
+  },
+  {
+    "nombre": "Limonada natural",
+    "categoria": "Limonada",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Limonada de coco",
+    "categoria": "Limonada",
+    "precio": 12000,
+    "stock": 25
+  },
+  {
+    "nombre": "Limonada cerezada",
+    "categoria": "Limonada",
+    "precio": 12000,
+    "stock": 25
+  },
+  {
+    "nombre": "Limonada de vino",
+    "categoria": "Limonada",
+    "precio": 15000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jugo de mora en agua",
+    "categoria": "Jugo",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jugo de mango en agua",
+    "categoria": "Jugo",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jugo de lulo en agua",
+    "categoria": "Jugo",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jugo de maracuyá en agua",
+    "categoria": "Jugo",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jugo de guanábana en agua",
+    "categoria": "Jugo",
+    "precio": 7000,
+    "stock": 25
+  },
+  {
+    "nombre": "Jarra de jugo en agua",
+    "categoria": "Jugo",
+    "precio": 18000,
+    "stock": 10
+  },
+  {
+    "nombre": "Jarra de jugo en leche",
+    "categoria": "Jugo",
+    "precio": 22000,
+    "stock": 10
+  },
+  {
+    "nombre": "Coca-Cola tradicional",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Coca-Cola Zero",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Colombiana",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Manzana",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Bretaña",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Ginger",
+    "categoria": "gaseosa",
+    "precio": 5000,
+    "stock": 30
+  },
+  {
+    "nombre": "Agua con gas",
+    "categoria": "gaseosa",
+    "precio": 4000,
+    "stock": 30
+  },
+  {
+    "nombre": "Agua sin gas",
+    "categoria": "gaseosa",
+    "precio": 4000,
+    "stock": 30
+  },
+  {
+    "nombre": "Cerveza Corona",
+    "categoria": "Cerveza",
+    "precio": 10000,
+    "stock": 30
+  },
+  {
+    "nombre": "Cerveza Club Colombia",
+    "categoria": "Cerveza",
+    "precio": 6000,
+    "stock": 30
+  },
+  {
+    "nombre": "Cerveza Póker",
+    "categoria": "Cerveza",
+    "precio": 6000,
+    "stock": 30
+  },
+  {
+    "nombre": "Cerveza Águila Light",
+    "categoria": "Cerveza",
+    "precio": 6000,
+    "stock": 30
+  },
+  {
+    "nombre": "Vino De la abuela (botella)",
+    "categoria": "vino",
+    "precio": 40000,
+    "stock": 10
+  },
+  {
+    "nombre": "Vino Natasha (botella)",
+    "categoria": "vino",
+    "precio": 45000,
+    "stock": 10
+  },
+  {
+    "nombre": "Vino tinto importado (botella)",
+    "categoria": "vino",
+    "precio": 50000,
+    "stock": 10
+  },
+  {
+    "nombre": "Vino blanco importado (botella)",
+    "categoria": "vino",
+    "precio": 50000,
+    "stock": 10
+  }
+]

@@ -5,37 +5,32 @@ import './styles/variables.css';
 import './App.css';
 import NavigationBar from './components/NavigationBar';
 import Home from './pages/Home';
-import ShowInventory from './pages/ShowInventory';
 import EnterProducts from './pages/EnterProducts';
 import EnterIngredients from './pages/EnterIngredients';
+import EnterGrains from './pages/EnterGrains';
+import EnterInputs from './pages/EnterInputs';
+import EnterCrockery from './pages/EnterCrockery';
 import Reports from './pages/Reports';
 
 function App() {
-  const [mensaje, setMensaje] = useState('');
-
-  useEffect(() => {
-    // Hacemos la solicitud a la API
-    fetch('/api/saludo')
-      .then((res) => res.json())
-      .then((data) => setMensaje(data.mensaje))  // Actualizamos el estado con el mensaje
-      .catch((err) => console.error('Error al conectar con el backend:', err));
-  }, []);  // Solo se ejecuta una vez cuando el componente se monta
 
   return (
-    <div className="min-vh-100 bg-light">
-      <NavigationBar />
-      <Router>
+    <Router>
+      <div className="min-vh-100 bg-light">
+        <NavigationBar />
         <div className="mt-5">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/ViewInventory" element={<ShowInventory />} />
-            <Route path="/EnterProduct" element={<EnterProducts />} />
-            <Route path="/EnterIngredient" element={<EnterIngredients />} />
+            <Route path="/EnterProducts" element={<EnterProducts />} />
+            <Route path="/EnterIngredients" element={<EnterIngredients />} />
+            <Route path="/EnterGrains" element={<EnterGrains />} />
+            <Route path="/EnterInputs" element={<EnterInputs />} />
+            <Route path="/EnterCrockery" element={<EnterCrockery />} />
             <Route path="/Reports" element={<Reports />} />
           </Routes>
         </div>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 
