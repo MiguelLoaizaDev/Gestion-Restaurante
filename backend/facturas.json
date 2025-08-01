@@ -1,0 +1,72 @@
+[
+  {
+    "mesaId": 1,
+    "customerName": "",
+    "pedido": [
+      {
+        "nombre": "Ceviche de camarón",
+        "categoria": "entrada",
+        "precio": 22000,
+        "stock": 1010
+      },
+      {
+        "nombre": "Aborrajados",
+        "categoria": "entrada",
+        "precio": 16000,
+        "stock": 15
+      },
+      {
+        "nombre": "Cerveza Corona",
+        "categoria": "Cerveza",
+        "precio": 10000,
+        "stock": 30
+      },
+      {
+        "nombre": "Cerveza Club Colombia",
+        "categoria": "Cerveza",
+        "precio": 6000,
+        "stock": 30
+      }
+    ],
+    "subtotal": 54000,
+    "propina": 10800,
+    "totalFinal": 64800,
+    "metodoPago": "efectivo",
+    "porcentajePropina": 20,
+    "fecha": "2025-07-31T19:32:07.261Z",
+    "estado": "facturado",
+    "id": 1
+  },
+  {
+    "mesaId": 2,
+    "customerName": "",
+    "pedido": [
+      {
+        "nombre": "Ceviche de camarón",
+        "categoria": "entrada",
+        "precio": 22000,
+        "stock": 1010
+      },
+      {
+        "nombre": "Ceviche de camarón",
+        "categoria": "entrada",
+        "precio": 22000,
+        "stock": 1010
+      },
+      {
+        "nombre": "Bolas de queso",
+        "categoria": "entrada",
+        "precio": 15000,
+        "stock": 20
+      }
+    ],
+    "subtotal": 59000,
+    "propina": 0,
+    "totalFinal": 59000,
+    "metodoPago": "dataphone",
+    "porcentajePropina": 0,
+    "fecha": "2025-07-31T19:54:31.075Z",
+    "estado": "facturado",
+    "id": 2
+  }
+]

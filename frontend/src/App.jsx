@@ -10,7 +10,9 @@ import EnterIngredients from './pages/EnterIngredients';
 import EnterGrains from './pages/EnterGrains';
 import EnterInputs from './pages/EnterInputs';
 import EnterCrockery from './pages/EnterCrockery';
+import ViewOrders from './pages/ViewOrders';
 import Reports from './pages/Reports';
+import CuadreCaja from './pages/CuadreCaja';
 
 function App() {
 
@@ -26,7 +28,9 @@ function App() {
             <Route path="/EnterGrains" element={<EnterGrains />} />
             <Route path="/EnterInputs" element={<EnterInputs />} />
             <Route path="/EnterCrockery" element={<EnterCrockery />} />
+            <Route path="/ViewOrders" element={<ViewOrders />} />
             <Route path="/Reports" element={<Reports />} />
+            <Route path="/CuadreCaja" element={<CuadreCaja />} />
           </Routes>
         </div>
       </div>

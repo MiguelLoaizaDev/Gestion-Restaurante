@@ -1,0 +1,22 @@
+[
+  {
+    "mesaId": 1,
+    "customerName": "",
+    "status": "available",
+    "pedido": [],
+    "total": 54000,
+    "fecha": "2025-07-31T19:31:06.522Z",
+    "estado": "facturado",
+    "facturaId": 1
+  },
+  {
+    "mesaId": 2,
+    "customerName": "",
+    "status": "available",
+    "pedido": [],
+    "total": 59000,
+    "fecha": "2025-07-31T19:54:09.622Z",
+    "estado": "facturado",
+    "facturaId": 2
+  }
+]

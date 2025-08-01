@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUtensils, FaBoxOpen, FaClipboardList, FaChartBar } from 'react-icons/fa';
+import { FaUtensils, FaBoxOpen, FaClipboardList, FaChartBar, FaCashRegister } from 'react-icons/fa';
 
 function NavigationBar() {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -79,6 +79,12 @@ function NavigationBar() {
                             <a className="nav-link d-flex align-items-center" href="/Reports">
                                 <FaChartBar className="me-2" />
                                 Reportes
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link d-flex align-items-center" href="/CuadreCaja">
+                                <FaCashRegister className="me-2" />
+                                Cuadre de Caja
                             </a>
                         </li>
                     </ul>

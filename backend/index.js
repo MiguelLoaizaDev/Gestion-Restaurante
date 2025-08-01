@@ -134,7 +134,6 @@ app.put('/api/productos/:nombre', (req, res) => {
   }
 });
 
-// Ruta para crear un pedido
 app.use(express.json());
 
 app.post('/api/pedidos', (req, res) => {
@@ -157,6 +156,126 @@ app.post('/api/pedidos', (req, res) => {
     res.status(201).json({ mensaje: 'Pedido creado exitosamente', pedido });
   } catch (error) {
     res.status(500).json({ error: 'No se pudo crear el pedido.' });
+  }
+});
+
+// Ruta para obtener el estado de todas las mesas
+app.get('/api/mesas', (req, res) => {
+  try {
+    // Leer pedidos para obtener el estado actual de las mesas
+    let pedidos = [];
+    try {
+      pedidos = JSON.parse(fs.readFileSync('./pedidos.json', 'utf8'));
+    } catch (e) {
+      pedidos = [];
+    }
+
+    // Crear array de 15 mesas con estado por defecto
+    const mesas = Array.from({ length: 15 }, (_, i) => ({
+      id: i + 1,
+      status: 'available',
+      capacity: i % 3 === 0 ? 6 : i % 2 === 0 ? 4 : 2,
+      customerName: '',
+      pedido: [],
+      timeOccupied: undefined
+    }));
+
+    // Actualizar mesas con datos de pedidos existentes
+    pedidos.forEach(pedido => {
+      const mesaIndex = pedido.mesaId - 1;
+      if (mesaIndex >= 0 && mesaIndex < 15) {
+        mesas[mesaIndex] = {
+          ...mesas[mesaIndex],
+          status: pedido.status,
+          customerName: pedido.customerName,
+          pedido: pedido.pedido,
+          timeOccupied: pedido.fecha
+        };
+      }
+    });
+
+    res.json(mesas);
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudieron cargar las mesas.' });
+  }
+});
+
+// Ruta para obtener el estado de una mesa específica
+app.get('/api/mesas/:id', (req, res) => {
+  try {
+    const mesaId = parseInt(req.params.id);
+
+    // Leer pedidos para obtener el estado actual de la mesa
+    let pedidos = [];
+    try {
+      pedidos = JSON.parse(fs.readFileSync('./pedidos.json', 'utf8'));
+    } catch (e) {
+      pedidos = [];
+    }
+
+    // Buscar la mesa específica
+    const mesa = pedidos.find(p => p.mesaId === mesaId);
+
+    if (mesa) {
+      res.json(mesa);
+    } else {
+      // Si no existe, crear una mesa por defecto
+      const mesaDefault = {
+        id: mesaId,
+        status: 'available',
+        capacity: mesaId % 3 === 0 ? 6 : mesaId % 2 === 0 ? 4 : 2,
+        customerName: '',
+        pedido: [],
+        timeOccupied: undefined
+      };
+      res.json(mesaDefault);
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudo obtener el estado de la mesa.' });
+  }
+});
+
+// Ruta para actualizar el estado de una mesa específica
+app.put('/api/mesas/:id', (req, res) => {
+  try {
+    const mesaId = parseInt(req.params.id);
+    const actualizacion = req.body;
+
+    // Leer pedidos existentes
+    let pedidos = [];
+    try {
+      pedidos = JSON.parse(fs.readFileSync('./pedidos.json', 'utf8'));
+    } catch (e) {
+      pedidos = [];
+    }
+
+    // Buscar si ya existe un pedido para esta mesa
+    const pedidoExistenteIndex = pedidos.findIndex(p => p.mesaId === mesaId);
+
+    if (pedidoExistenteIndex !== -1) {
+      // Actualizar pedido existente
+      pedidos[pedidoExistenteIndex] = {
+        ...pedidos[pedidoExistenteIndex],
+        ...actualizacion,
+        mesaId: mesaId
+      };
+    } else if (actualizacion.pedido && actualizacion.pedido.length > 0) {
+      // Crear nuevo pedido si no existe y hay productos
+      pedidos.push({
+        mesaId: mesaId,
+        customerName: actualizacion.customerName || '',
+        status: actualizacion.status || 'occupied',
+        pedido: actualizacion.pedido,
+        total: actualizacion.pedido.reduce((total, producto) => total + producto.precio, 0),
+        fecha: new Date().toISOString()
+      });
+    }
+
+    // Guardar pedidos actualizados
+    fs.writeFileSync('./pedidos.json', JSON.stringify(pedidos, null, 2));
+    res.json({ mensaje: 'Mesa actualizada exitosamente', mesa: actualizacion });
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudo actualizar la mesa.' });
   }
 });
 
@@ -376,6 +495,138 @@ app.get('/api/reportes', (req, res) => {
     res.json(reportes);
   } catch (error) {
     res.status(500).json({ error: 'No se pudieron cargar los reportes.' });
+  }
+});
+
+// Ruta para crear una factura
+app.post('/api/facturas', (req, res) => {
+  try {
+    const factura = req.body;
+    let facturas = [];
+    try {
+      facturas = JSON.parse(fs.readFileSync('./facturas.json', 'utf8'));
+    } catch (e) {
+      facturas = [];
+    }
+
+    // Agregar la nueva factura
+    facturas.push({
+      ...factura,
+      id: facturas.length + 1,
+      fecha: new Date().toISOString()
+    });
+
+    // Guardar facturas
+    fs.writeFileSync('./facturas.json', JSON.stringify(facturas, null, 2));
+
+    // Actualizar el estado del pedido a facturado y liberar la mesa
+    let pedidos = [];
+    try {
+      pedidos = JSON.parse(fs.readFileSync('./pedidos.json', 'utf8'));
+    } catch (e) {
+      pedidos = [];
+    }
+
+    // Buscar y actualizar el pedido correspondiente
+    const pedidoIndex = pedidos.findIndex(p => p.mesaId === factura.mesaId);
+    if (pedidoIndex !== -1) {
+      pedidos[pedidoIndex].estado = 'facturado';
+      pedidos[pedidoIndex].status = 'available'; // Liberar la mesa
+      pedidos[pedidoIndex].facturaId = facturas.length;
+      pedidos[pedidoIndex].customerName = ''; // Limpiar nombre del cliente
+      pedidos[pedidoIndex].pedido = []; // Limpiar pedido
+      pedidos[pedidoIndex].timeOccupied = undefined; // Limpiar hora de ocupación
+      fs.writeFileSync('./pedidos.json', JSON.stringify(pedidos, null, 2));
+    }
+
+    res.status(201).json({
+      mensaje: 'Factura creada exitosamente y mesa liberada',
+      factura: facturas[facturas.length - 1]
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudo crear la factura.' });
+  }
+});
+
+// Ruta para obtener facturas
+app.get('/api/facturas', (req, res) => {
+  try {
+    let facturas = [];
+    try {
+      facturas = JSON.parse(fs.readFileSync('./facturas.json', 'utf8'));
+    } catch (e) {
+      facturas = [];
+    }
+    res.json(facturas);
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudieron cargar las facturas.' });
+  }
+});
+
+// Ruta para crear un cuadre de caja
+app.post('/api/cuadres', (req, res) => {
+  try {
+    const cuadre = req.body;
+    let cuadres = [];
+    try {
+      cuadres = JSON.parse(fs.readFileSync('./cuadres.json', 'utf8'));
+    } catch (e) {
+      cuadres = [];
+    }
+
+    // Agregar el nuevo cuadre
+    cuadres.push({
+      ...cuadre,
+      id: cuadres.length + 1,
+      fechaCreacion: new Date().toISOString()
+    });
+
+    // Guardar cuadres
+    fs.writeFileSync('./cuadres.json', JSON.stringify(cuadres, null, 2));
+
+    res.status(201).json({
+      mensaje: 'Cuadre de caja guardado exitosamente',
+      cuadre: cuadres[cuadres.length - 1]
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudo guardar el cuadre de caja.' });
+  }
+});
+
+// Ruta para obtener cuadres de caja
+app.get('/api/cuadres', (req, res) => {
+  try {
+    let cuadres = [];
+    try {
+      cuadres = JSON.parse(fs.readFileSync('./cuadres.json', 'utf8'));
+    } catch (e) {
+      cuadres = [];
+    }
+    res.json(cuadres);
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudieron cargar los cuadres de caja.' });
+  }
+});
+
+// Ruta para obtener un cuadre específico por ID
+app.get('/api/cuadres/:id', (req, res) => {
+  try {
+    const cuadreId = parseInt(req.params.id);
+    let cuadres = [];
+    try {
+      cuadres = JSON.parse(fs.readFileSync('./cuadres.json', 'utf8'));
+    } catch (e) {
+      cuadres = [];
+    }
+
+    const cuadre = cuadres.find(c => c.id === cuadreId);
+    if (cuadre) {
+      res.json(cuadre);
+    } else {
+      res.status(404).json({ error: 'Cuadre de caja no encontrado.' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'No se pudo obtener el cuadre de caja.' });
   }
 });
 
